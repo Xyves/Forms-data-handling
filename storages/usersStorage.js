@@ -1,11 +1,11 @@
 class UsersStorage {
   constructor() {
-    this.storage = {};
+    this.storage = [];
     this.id = 0;
   }
-  addUser({ firstName, lastName }) {
+  addUser({ firstName, lastName, email, age, bio }) {
     const id = this.id;
-    this.storage[id] = { id, firstName, lastName };
+    this.storage[id] = { id, firstName, lastName, email, age, bio };
     this.id++;
   }
 
@@ -16,11 +16,18 @@ class UsersStorage {
   getUser(id) {
     return this.storage[id];
   }
-  updateUser(id, {firstName, lastName}) {
-    this.storage(id) = {id,firstName,lastName};
+
+  updateUser(id, { firstName, lastName, email, age, bio }) {
+    this.storage[id] = { id, firstName, lastName, email, age, bio };
   }
+
   deleteUser(id) {
     delete this.storage[id];
   }
+  getUserByEmail(email) {
+    const user = this.storage.find((u) => u.email === email || null);
+    return user;
+  }
 }
+
 module.exports = new UsersStorage();
